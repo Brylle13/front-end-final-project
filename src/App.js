@@ -1,25 +1,13 @@
-import logo from './logo.svg';
+import React from 'react';
+import Users from './components/component-users/Users';
+import { useSelector } from 'react-redux';
+import Login from './components/component-login-logout/Login';
+import Layout from './components/Layout';
+//css
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export default function App() {
+  const token = useSelector((state) => state.login.token);
 
-export default App;
+  return <Layout>{token === null || !token ? <Login /> : <Users />}</Layout>;
+}
